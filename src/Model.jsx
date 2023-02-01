@@ -15,14 +15,20 @@ export default function Model(props) {
 
   useEffect(() => {
     window.addEventListener("keydown", onPlayHandler);
+    window.addEventListener("keyup", onStopHandler);
     return () => {
       window.removeEventListener("keydown", onPlayHandler);
+    window.addEventListener("keyup", onStopHandler);
     };
   }, [])
 
   const onPlayHandler = () => {
     console.log("Key pressed.");
     actions['Armature|mixamo.com|Layer0'].play();
+  };
+  const onStopHandler = () => {
+    console.log("Key unpressed.");
+    actions['Armature|mixamo.com|Layer0'].stop();
   };
 
 //   useEffect(() => {/* highlight-line */
