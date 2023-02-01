@@ -13,15 +13,17 @@ export default function Model(props) {
 
   console.log(group);
 
+  useEffect(() => {
+    window.addEventListener("keydown", onPlayHandler);
+    return () => {
+      window.removeEventListener("keydown", onPlayHandler);
+    };
+  }, [])
 
-  const keyboardEvent = (event) => {
-    console.log(event);
-    // if(event.code === 'ArrowUp'){
-      console.log('ciao');
-  actions['Armature|mixamo.com|Layer0'].play(); /* highlight-line */
-
-    // }
-  }
+  const onPlayHandler = () => {
+    console.log("Key pressed.");
+    actions['Armature|mixamo.com|Layer0'].play();
+  };
 
 //   useEffect(() => {/* highlight-line */
 
@@ -29,7 +31,7 @@ export default function Model(props) {
 //   actions['Armature|mixamo.com|Layer0'].play(); /* highlight-line */
 // });
   return (
-    <group onClick={keyboardEvent} ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Armature">
           <primitive object={nodes.Hips} />
